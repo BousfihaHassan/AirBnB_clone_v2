@@ -4,13 +4,11 @@ Fabric script based on the file 2-do_deploy_web_static.py that creates and
 distributes an archive to the web servers, using the function deploy
 """
 from fabric.api import env, local, put, run
-from fabric.tasks import task
-from fabric.main import execute
 from datetime import datetime
 from os.path import exists, isdir
 env.hosts = ['54.162.97.17', '34.224.83.106']
 
-@task
+
 def do_pack():
     """creates tgz archive"""
     try:
@@ -23,7 +21,6 @@ def do_pack():
     except:
         return None
 
-@task
 def do_deploy(archive_path):
     """deploy archive"""
     if exists(archive_path) is False:
@@ -44,7 +41,6 @@ def do_deploy(archive_path):
     except:
         return False
 
-@task
 def deploy():
     """create and deploy archive"""
     archive_path = do_pack()
